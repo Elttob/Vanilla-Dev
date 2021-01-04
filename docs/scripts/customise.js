@@ -21,7 +21,7 @@ const ICON_COLOURS = {
 		green: hexToRGB("169C44"),
 		blue: hexToRGB("006FB2"),
 		purple: hexToRGB("AF38CD"),
-		grey: hexToRGB("3F3F3F"),
+		grey: hexToRGB("ffffff"),
 	},
 	graphite: {
 		red: hexToRGB("FF6666"),
