@@ -321,7 +321,7 @@ function exportIcons() {
 		exportIconBlobContext.save();
 		try {
 			exportIconBlobContext.clearRect(0, 0, EXPORT_SIZE_PX, EXPORT_SIZE_PX);
-			exportIconBlobContext.drawImage(exportBufferContext.canvas, iconIndex * ICON_SIZE_PX, 0, ICON_SIZE_PX, ICON_SIZE_PX, 0, 0, EXPORT_SIZE_PX, EXPORT_SIZE_PX);
+			exportIconBlobContext.drawImage(exportBufferContext.canvas, iconIndex * EXPORT_SIZE_PX, 0, EXPORT_SIZE_PX, EXPORT_SIZE_PX, 0, 0, EXPORT_SIZE_PX, EXPORT_SIZE_PX);
 			iconPromises[iconIndex] = new Promise((resolve, reject) => exportIconBlobContext.canvas.toBlob(resolve));
 		} finally {
 			exportIconBlobContext.restore();
