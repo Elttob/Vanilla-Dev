@@ -37,7 +37,7 @@ const INPUT_ICON_COLOURS = ICON_COLOURS.platinum;
 
 const ICONSET_URL = "/Vanilla-Dev/iconset/iconset.svg";
 const ICON_SIZE_PX = 16;
-const EXPORT_SIZE_PX = 128;
+const EXPORT_SIZE_PX = 16;
 const PREVIEW_ICON_PADDING = 4;
 
 let iconsetImage;
