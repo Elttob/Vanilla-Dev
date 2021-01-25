@@ -35,7 +35,9 @@ const ICON_COLOURS = {
 
 const INPUT_ICON_COLOURS = ICON_COLOURS.platinum;
 
-const ICONSET_URL = "/Vanilla-Dev/iconset/iconset.svg";
+const REPOSITORY_URL = "https://github.com/Elttob/Vanilla-Dev/raw/main"
+
+const ICONSET_URL = REPOSITORY_URL + "/icons/icons.svg";
 const ICON_SIZE_PX = 16;
 const EXPORT_SIZE_PX = 16;
 const PREVIEW_ICON_PADDING = 4;
