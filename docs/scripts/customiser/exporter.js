@@ -24,7 +24,7 @@ function renderExportBuffer(iconList, palette, overrideColour, exportResolution)
 
 	context.save()
 	try {
-		context.clearRect(0, 0, exportBufferContext.canvas.width, exportBufferContext.canvas.height)
+		context.clearRect(0, 0, exportCanvas.width, exportCanvas.height)
 		
 		let index = 0
 		for(const iconData of iconList) {
