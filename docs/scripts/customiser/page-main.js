@@ -144,8 +144,7 @@ function initResolutions() {
 async function exportIcons() {
 	showModalDialog('preparing-download')
 
-	let zipBlob = exporter.exportBlob(icondata, activePalette, overrideColour, exportResolution)
-	console.log(zipBlob)
+	let zipBlob = await exporter.exportBlob(icondata, activePalette, overrideColour, exportResolution)
 
 	const exportDownloadLink = document.querySelector("#export-download-link")
 
