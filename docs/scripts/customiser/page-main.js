@@ -2,6 +2,7 @@
 // MIT License (c) Elttob 2021
 
 import * as render from "./render.js"
+import * as exporter from "./exporter.js"
 
 // Instead of using relative URLs, we're using absolute URLs for portability.
 const BASE_URL = "https://elttob.github.io/Vanilla-Dev/icons/"
@@ -135,6 +136,25 @@ function initResolutions() {
 			setExportResolution(resolution)
 		})
 	}
+}
+
+/**
+ * Generates and downloads a zip of the icon set with the current settings.
+ */
+async function exportIcons() {
+	showModalDialog('preparing-download')
+
+	let zipBlob = exporter.exportBlob(icondata, activePalette, overrideColour, exportResolution);
+
+	const exportDownloadLink = document.querySelector("#export-download-link")
+
+	if(exportDownloadLink.href != "") {
+		URL.revokeObjectURL(exportDownloadLink.href)
+	}
+	exportDownloadLink.href = URL.createObjectURL(blob)
+	exportDownloadLink.click()
+
+	showModalDialog('download-ready')
 }
 
 /**
