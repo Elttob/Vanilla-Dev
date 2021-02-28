@@ -9,6 +9,19 @@ let palettes
 let activePalette
 
 /**
+ * Returns the palette object with the given ID.
+ * @param {*} paletteID - the id to search for
+ */
+function getPaletteByID(paletteID) {
+	for(const palette of palettes) {
+		if(palette.id == paletteID) {
+			return palette
+		}
+	}
+	return null
+}
+
+/**
  * Changes the currently active colour palette.
  * @param {*} palette - The palette object to use.
  */
@@ -32,13 +45,13 @@ function initPalettes() {
 		userTheme = "dark";
 	}
 
-	setActivePalette(palettes.palettes[palettes.defaults[userTheme]])
+	setActivePalette(getPaletteByID(palettes.defaults[userTheme]))
 
 	const paletteOptions = document.querySelectorAll("input[name=theme][type=radio]")
 
 	for(const paletteOption of paletteOptions) {
 		paletteOption.addEventListener('click', () => {
-			setActivePalette(palettes.palettes[paletteOption.value])
+			setActivePalette(getPaletteByID(paletteOption.value))
 		})
 	}
 }
