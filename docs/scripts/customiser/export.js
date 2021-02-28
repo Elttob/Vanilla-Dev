@@ -6,7 +6,7 @@ import * as render from "./render.js"
 let exportCanvas = document.createElement("canvas")
 let exportIconCanvas = document.createElement("canvas")
 
-function renderExportBuffer(iconList, palette, overrideColour, exportResolution) {
+function renderExportBuffer(iconList, colours, overrideColour, exportResolution) {
 	let context = exportCanvas.getContext("2d")
 	exportCanvas.width = iconList.length * exportResolution
 	exportCanvas.height = exportResolution
@@ -23,7 +23,9 @@ function renderExportBuffer(iconList, palette, overrideColour, exportResolution)
 				colour = overrideColour
 			}
 
-			render.renderIcon(context, iconData.icon, index * exportResolution, 0, exportResolution, colour)
+			let rgbColour = colours[colour]
+
+			render.renderIcon(context, iconData.icon, index * exportResolution, 0, exportResolution, rgbColour)
 
 			index++
 		}
@@ -32,8 +34,8 @@ function renderExportBuffer(iconList, palette, overrideColour, exportResolution)
 	}
 }
 
-export async function exportBlob(iconList, palette, overrideColour, exportResolution) {
-	renderExportBuffer(iconList, palette, overrideColour, exportResolution)
+export async function exportBlob(iconList, colours, overrideColour, exportResolution) {
+	renderExportBuffer(iconList, colours, overrideColour, exportResolution)
 
 	let iconPromises = []
 	
