@@ -36,8 +36,6 @@ function setActivePalette(palette) {
 	for(const paletteOption of paletteOptions) {
 		paletteOption.checked = paletteOption.value == palette.id
 	}
-
-	alert("Changing palette to " + palette.title)
 }
 
 /**
@@ -90,8 +88,6 @@ function setOverrideColour(colour) {
 			}
 		})
 	}
-
-	alert("Changing override colour to " + colour)
 }
 
 /**
@@ -124,8 +120,6 @@ function setExportResolution(resolution) {
 			resolutionOption.checked = resolutionOption.value == exportResolution
 		})
 	}
-
-	alert("Changing export resolution to " + resolution)
 }
 
 /**
@@ -156,8 +150,6 @@ async function init() {
 	initPalettes()
 	initStyles()
 	initResolutions()
-
-	alert("Initialised palettes, styles and resolutions")
 
 	document.querySelector("#page-loading").className = "done"
 }
