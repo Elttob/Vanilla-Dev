@@ -24,20 +24,33 @@
 	
 	<main>
 		<section class="main-section">
-			<h1>Step 1: Choose your theme</h1>
-			<p>Vanilla uses an alternate palette for dark theme which improves contrast.</p>
+			<h1>Step 1: Choose your colours</h1>
+			<p>Vanilla offers different colours for dark theme to improve contrast.</p>
 
-			<fieldset id="theme-options"></fieldset>
+			<fieldset id="palette-options"></fieldset>
 
 			<h1>Step 2: Choose your style</h1>
-			<p>You can add colours for easier navigation or use a single colour for a cleaner look.</p>
+			<p>You can use multiple colours for easier navigation or use a single colour for a cleaner look.</p>
 
 			<fieldset id="style-options">
 				<label><input type="radio" name="style" value="colourful" checked>Colourful</label>
 				<label><input type="radio" name="style" value="mono"             >Mono     </label>
 			</fieldset>
 
-			<h1>Step 3: Download your icon set</h1>
+			<h1>Step 3: Choose your resolution</h1>
+			<p>If you're using Vanilla icons for videos or tutorials, you can get higher resolution versions.</p>
+
+			<fieldset id="style-options">
+				<label><input type="radio" name="style" value="16" checked>16x (works with Studio)</label>
+				<label><input type="radio" name="style" value="32"        >32x</label>
+				<label><input type="radio" name="style" value="64"        >64x</label>
+				<label><input type="radio" name="style" value="128"       >128x</label>
+				<label><input type="radio" name="style" value="256"       >256x</label>
+				<label><input type="radio" name="style" value="512"       >512x</label>
+				<label><input type="radio" name="style" value="1024"      >1024x</label>
+			</fieldset>
+
+			<h1>Step 4: Download your icon set</h1>
 
 			<a class="primary-button" href="#" onclick="showModalDialog('donate');">Download icon set .zip</a>
 			<a class="secondary-button" href="#" onclick="showModalDialog('how-to-install');">How to install</a>
