@@ -6,7 +6,18 @@ import * as render from "./render.js"
 let exportCanvas = document.createElement("canvas")
 let exportIconCanvas = document.createElement("canvas")
 
-function renderExportBuffer(iconList, colours, overrideColour, exportResolution) {
+// adapted from https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+function hexToRGB(hex) {
+	let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result ? {
+		r: parseInt(result[1], 16),
+		g: parseInt(result[2], 16),
+		b: parseInt(result[3], 16)
+	} : null;
+}
+
+
+function renderExportBuffer(iconList, palette, overrideColour, exportResolution) {
 	let context = exportCanvas.getContext("2d")
 	exportCanvas.width = iconList.length * exportResolution
 	exportCanvas.height = exportResolution
@@ -23,7 +34,7 @@ function renderExportBuffer(iconList, colours, overrideColour, exportResolution)
 				colour = overrideColour
 			}
 
-			let rgbColour = colours[colour]
+			let rgbColour = hexToRGB(palette.colours[colour])
 
 			render.renderIcon(context, iconData.icon, index * exportResolution, 0, exportResolution, rgbColour)
 
@@ -34,8 +45,8 @@ function renderExportBuffer(iconList, colours, overrideColour, exportResolution)
 	}
 }
 
-export async function exportBlob(iconList, colours, overrideColour, exportResolution) {
-	renderExportBuffer(iconList, colours, overrideColour, exportResolution)
+export async function exportBlob(iconList, palette, overrideColour, exportResolution) {
+	renderExportBuffer(iconList, palette, overrideColour, exportResolution)
 
 	let iconPromises = []
 	
