@@ -170,6 +170,8 @@ async function init() {
 	initStyles()
 	initResolutions()
 
+	document.querySelector("#export-button").addEventListener("click", exportIcons)
+
 	document.querySelector("#page-loading").className = "done"
 }
 
