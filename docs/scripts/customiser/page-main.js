@@ -173,6 +173,8 @@ async function init() {
 	document.querySelector("#export-button").addEventListener("click", exportIcons)
 
 	document.querySelector("#page-loading").className = "done"
+
+	render.renderIcon(document.querySelector("#preview").getContext("2d"), 2, 0, 0, 16)
 }
 
 init()
