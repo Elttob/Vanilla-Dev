@@ -138,7 +138,7 @@ function initResolutions() {
 
 	for(const resolutionOption of resolutionOptions) {
 		resolutionOption.addEventListener('click', () => {
-			const resolution = Number(resolutionOptions.value)
+			const resolution = Number(resolutionOption.value)
 			setOverrideColour(resolution)
 		})
 	}
