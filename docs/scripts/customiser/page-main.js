@@ -48,7 +48,7 @@ function initPalettes() {
 	const paletteFieldset = document.querySelector("#theme-options")
 
 	for(const palette of palettes.palettes) {
-		paletteFieldset.innerHTML += `<label><input type="radio" name="theme" value="${palette.id}">${palette.name}</label>`
+		paletteFieldset.innerHTML += `<label><input type="radio" name="theme" value="${palette.id}">${palette.title}</label>`
 	}
 
 	setActivePalette(getPaletteByID(palettes.defaults[userTheme]))
