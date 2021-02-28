@@ -13,7 +13,7 @@ let activePalette
  * @param {*} paletteID - the id to search for
  */
 function getPaletteByID(paletteID) {
-	for(const palette of palettes) {
+	for(const palette of palettes.palettes) {
 		if(palette.id == paletteID) {
 			return palette
 		}
