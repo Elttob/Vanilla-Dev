@@ -2,6 +2,7 @@
 // MIT License (c) Elttob 2021
 
 import * as render from "./render.js"
+import JSZip from "../libs/jszip.min.js"
 
 let exportCanvas = document.createElement("canvas")
 let exportIconCanvas = document.createElement("canvas")
