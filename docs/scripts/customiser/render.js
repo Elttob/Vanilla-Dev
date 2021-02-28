@@ -1,5 +1,5 @@
 // Vanilla Icon Renderer v2
-// by Elttob
+// MIT License (c) Elttob 2021
 
 // Instead of using relative URLs, we're using absolute URLs for portability.
 const BASE_URL = "https://elttob.github.io/Vanilla-Dev/icons/"
