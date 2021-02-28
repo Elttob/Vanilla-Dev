@@ -29,8 +29,8 @@ export async function exportBlob(iconList, palette, overrideColour, exportResolu
 	let sheetContext = exportSheetCanvas.getContext("2d")
 
 	if(exportWithSheet) {
-		exportCanvas.width = iconList.length * exportResolution
-		exportCanvas.height = exportResolution
+		exportSheetCanvas.width = iconList.length * exportResolution
+		exportSheetCanvas.height = exportResolution
 
 		sheetContext.clearRect(0, 0, iconList.length * exportResolution, exportResolution)
 	}
@@ -69,7 +69,7 @@ export async function exportBlob(iconList, palette, overrideColour, exportResolu
 	}
 
 	if(exportWithSheet) {
-		let iconsheetBlob = await new Promise(resolve => exportCanvas.toBlob(resolve))
+		let iconsheetBlob = await new Promise(resolve => exportSheetCanvas.toBlob(resolve))
 		zip.file("ClassImages.png", iconsheetBlob)
 	}
 
