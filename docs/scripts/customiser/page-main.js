@@ -6,11 +6,13 @@ const BASE_URL = "https://elttob.github.io/Vanilla-Dev/icons/"
 let icondata
 let palettes
 
-let activePalette
+let activePalette = null
+let overrideColour = null
+let exportResolution = null
 
 /**
  * Returns the palette object with the given ID.
- * @param {*} paletteID - the id to search for
+ * @param {*} paletteID - The id to search for
  */
 function getPaletteByID(paletteID) {
 	for(const palette of palettes.palettes) {
@@ -23,7 +25,7 @@ function getPaletteByID(paletteID) {
 
 /**
  * Changes the currently active colour palette.
- * @param {*} palette - The palette object to use.
+ * @param {*} palette - The palette object to use
  */
 function setActivePalette(palette) {
 	document.documentElement.className = "theme-" + palette.page_colours
@@ -34,6 +36,8 @@ function setActivePalette(palette) {
 	for(const paletteOption of paletteOptions) {
 		paletteOption.checked = paletteOption.value == palette.id
 	}
+
+	alert("Changing palette to " + palette.title)
 }
 
 /**
@@ -42,7 +46,7 @@ function setActivePalette(palette) {
 function initPalettes() {
 	let userTheme = "light";
 	if(window.matchMedia != null && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-		userTheme = "dark";
+		userTheme = "dark"
 	}
 
 	const paletteFieldset = document.querySelector("#palette-options")
@@ -63,6 +67,84 @@ function initPalettes() {
 }
 
 /**
+ * Changes the current override colour, or resets it to null.
+ * @param {*} colour - The new override colour, or null
+ */
+function setOverrideColour(colour) {
+	overrideColour = colour
+
+	const styleOptions = document.querySelectorAll("input[name=style][type=radio]")
+
+	for(const styleOption of styleOptions) {
+		styleOption.addEventListener('click', () => {
+			switch(styleOption.value) {
+				case "colourful":
+					styleOption.checked = overrideColour == null
+					break
+				case "mono":
+					styleOption.checked = overrideColour == "grey"
+					break
+				default:
+					styleOption.checked = false
+					break
+			}
+		})
+	}
+
+	alert("Changing override colour to " + colour)
+}
+
+/**
+ * Initialises the style options on the customiser page.
+ */
+function initStyles() {
+	setOverrideColour(null)
+
+	const styleOptions = document.querySelectorAll("input[name=style][type=radio]")
+
+	for(const styleOption of styleOptions) {
+		styleOption.addEventListener('click', () => {
+			const colour = styleOption.value == "mono" ? "grey" : null
+			setOverrideColour(colour)
+		})
+	}
+}
+
+/**
+ * Changes the resolution used when exporting icons.
+ * @param {*} resolution - The size of exported icons, in px
+ */
+function setExportResolution(resolution) {
+	exportResolution = resolution
+
+	const resolutionOptions = document.querySelectorAll("input[name=resolution][type=radio]")
+
+	for(const resolutionOption of resolutionOptions) {
+		resolutionOption.addEventListener('click', () => {
+			resolutionOption.checked = resolutionOption.value == exportResolution
+		})
+	}
+
+	alert("Changing export resolution to " + resolution)
+}
+
+/**
+ * Initialises the resolution options on the customiser page.
+ */
+function initResolutions() {
+	setExportResolution(16)
+
+	const resolutionOptions = document.querySelectorAll("input[name=resolution][type=radio]")
+
+	for(const resolutionOption of resolutionOptions) {
+		resolutionOption.addEventListener('click', () => {
+			const resolution = Number(resolutionOptions.value)
+			setOverrideColour(resolution)
+		})
+	}
+}
+
+/**
  * Initialises the main page asynchronously.
  */
 async function init() {
@@ -72,6 +154,10 @@ async function init() {
 	await render.init()
 
 	initPalettes()
+	initStyles()
+	initResolutions()
+
+	alert("Initialised palettes, styles and resolutions")
 
 	document.querySelector("#page-loading").className = "done"
 }
