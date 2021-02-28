@@ -151,7 +151,7 @@ async function exportIcons() {
 	if(exportDownloadLink.href != "") {
 		URL.revokeObjectURL(exportDownloadLink.href)
 	}
-	exportDownloadLink.href = URL.createObjectURL(blob)
+	exportDownloadLink.href = URL.createObjectURL(zipBlob)
 	exportDownloadLink.click()
 
 	showModalDialog('download-ready')
