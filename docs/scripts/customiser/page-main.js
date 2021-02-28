@@ -77,19 +77,17 @@ function setOverrideColour(colour) {
 	const styleOptions = document.querySelectorAll("input[name=style][type=radio]")
 
 	for(const styleOption of styleOptions) {
-		styleOption.addEventListener('click', () => {
-			switch(styleOption.value) {
-				case "colourful":
-					styleOption.checked = overrideColour == null
-					break
-				case "mono":
-					styleOption.checked = overrideColour == "grey"
-					break
-				default:
-					styleOption.checked = false
-					break
-			}
-		})
+		switch(styleOption.value) {
+			case "colourful":
+				styleOption.checked = overrideColour == null
+				break
+			case "mono":
+				styleOption.checked = overrideColour == "grey"
+				break
+			default:
+				styleOption.checked = false
+				break
+		}
 	}
 }
 
@@ -119,9 +117,7 @@ function setExportResolution(resolution) {
 	const resolutionOptions = document.querySelectorAll("input[name=resolution][type=radio]")
 
 	for(const resolutionOption of resolutionOptions) {
-		resolutionOption.addEventListener('click', () => {
-			resolutionOption.checked = resolutionOption.value == exportResolution
-		})
+		resolutionOption.checked = resolutionOption.value == exportResolution
 	}
 }
 
