@@ -73,7 +73,7 @@ export async function exportBlob(iconList, palette, overrideColour, exportResolu
 	zip.file("ClassImages.png", iconsheetBlob)
 	let modManagerFolder = zip.folder("ModManagerIcons")
 
-	for(let iconIndex=0; iconIndex < iconSetSize; iconIndex++) {
+	for(let iconIndex=0; iconIndex < iconList.length; iconIndex++) {
 		modManagerFolder.file("explorer-icon-" + iconIndex + ".png", iconBlobs[iconIndex])
 	}
 
