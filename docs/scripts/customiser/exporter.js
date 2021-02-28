@@ -54,7 +54,7 @@ export async function exportBlob(iconList, palette, overrideColour, exportResolu
 	exportIconCanvas.width = exportResolution
 	exportIconCanvas.height = exportResolution
 
-	for(let iconIndex = 0; iconIndex < iconSetSize; iconIndex++) {
+	for(let iconIndex = 0; iconIndex < iconList.length; iconIndex++) {
 		context.save()
 		try {
 			context.clearRect(0, 0, exportResolution, exportResolution)
