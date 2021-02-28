@@ -3,7 +3,7 @@
 
 import * as render from "./render.js"
 
-let exportCanvas = document.createElement("canvas")
+let exportSheetCanvas = document.createElement("canvas")
 let exportIconCanvas = document.createElement("canvas")
 
 // adapted from https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
@@ -16,65 +16,61 @@ function hexToRGB(hex) {
 	} : null;
 }
 
+export async function exportBlob(iconList, palette, overrideColour, exportResolution) {
+	const exportWithSheet = exportResolution < 256
 
-function renderExportBuffer(iconList, palette, overrideColour, exportResolution) {
-	let context = exportCanvas.getContext("2d")
-	exportCanvas.width = iconList.length * exportResolution
-	exportCanvas.height = exportResolution
+	let zip = new JSZip()
+	let modManagerFolder = zip.folder("ModManagerIcons")
+
+	let context = exportIconCanvas.getContext("2d")
+	exportIconCanvas.width = exportResolution
+	exportIconCanvas.height = exportResolution
+
+	let sheetContext = exportSheetCanvas.getContext("2d")
+
+	if(exportWithSheet) {
+		exportCanvas.width = iconList.length * exportResolution
+		exportCanvas.height = exportResolution
+
+		sheetContext.clearRect(0, 0, iconList.length * exportResolution, exportResolution)
+	}
+
+	let iconPromises = []
 
 	context.save()
 	try {
-		context.clearRect(0, 0, exportCanvas.width, exportCanvas.height)
-		
 		let index = 0
 		for(const iconData of iconList) {
 			let colour = iconData.colour
-
 			if(overrideColour != null) {
 				colour = overrideColour
 			}
-
 			let rgbColour = hexToRGB(palette.colours[colour])
 
-			render.renderIcon(context, iconData.icon, index * exportResolution, 0, exportResolution, rgbColour)
+			context.clearRect(0, 0, exportResolution, exportResolution)
+			render.renderIcon(context, iconData.icon, 0, 0, exportResolution, rgbColour)
+
+			if(exportWithSheet) {
+				render.renderIcon(sheetContext, iconData.icon, index * exportResolution, 0, exportResolution, rgbColour)
+			}
+
+			iconPromises[index] = new Promise(resolve => exportIconCanvas.toBlob(resolve))
 
 			index++
 		}
 	} finally {
 		context.restore()
 	}
-}
-
-export async function exportBlob(iconList, palette, overrideColour, exportResolution) {
-	renderExportBuffer(iconList, palette, overrideColour, exportResolution)
-
-	let iconPromises = []
-	
-	let context = exportIconCanvas.getContext("2d")
-	exportIconCanvas.width = exportResolution
-	exportIconCanvas.height = exportResolution
-
-	for(let iconIndex = 0; iconIndex < iconList.length; iconIndex++) {
-		context.save()
-		try {
-			context.clearRect(0, 0, exportResolution, exportResolution)
-			context.drawImage(exportCanvas, iconIndex * exportResolution, 0, exportResolution, exportResolution, 0, 0, exportResolution, exportResolution)
-			iconPromises[iconIndex] = new Promise(resolve => exportIconCanvas.toBlob(resolve))
-		} finally {
-			context.restore()
-		}
-	}
 
 	let iconBlobs = await Promise.all(iconPromises)
-	let iconsheetBlob = await new Promise(resolve => exportCanvas.toBlob(resolve))
-	
-	let zip = new JSZip()
-
-	zip.file("ClassImages.png", iconsheetBlob)
-	let modManagerFolder = zip.folder("ModManagerIcons")
 
 	for(let iconIndex=0; iconIndex < iconList.length; iconIndex++) {
 		modManagerFolder.file("explorer-icon-" + iconIndex + ".png", iconBlobs[iconIndex])
+	}
+
+	if(exportWithSheet) {
+		let iconsheetBlob = await new Promise(resolve => exportCanvas.toBlob(resolve))
+		zip.file("ClassImages.png", iconsheetBlob)
 	}
 
 	let zipBlob = await zip.generateAsync({type: "blob"})
