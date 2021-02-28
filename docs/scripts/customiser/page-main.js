@@ -1,3 +1,6 @@
+// Vanilla Customiser v2
+// MIT License (c) Elttob 2021
+
 import * as render from "./render.js"
 
 // Instead of using relative URLs, we're using absolute URLs for portability.
