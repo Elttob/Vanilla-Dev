@@ -8,6 +8,7 @@
 		{
 			"id": "platinum",
 			"title": "Platinum (light)",
+			"page_colours": "platinum",
 			"colours": {
 				"red": "BF4040",
 				"yellow": "D68D1F",
@@ -20,6 +21,7 @@
 		{
 			"id": "graphite",
 			"title": "Graphite (dark)",
+			"page_colours": "graphite",
 			"colours": {
 				"red": "FF6666",
 				"yellow": "FFBC57",
@@ -32,6 +34,7 @@
 		{
 			"id": "white",
 			"title": "White (transparency only)",
+			"page_colours": "graphite",
 			"colours": {
 				"red": "FFFFFF",
 				"yellow": "FFFFFF",
